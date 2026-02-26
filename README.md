@@ -2,4 +2,6 @@
 
 ### **Proje Hakkında**
 
-![Uploading torstensimon-news-2444888_1280.png…]()
+![App Screenshot](news.jpg)
+
+
