@@ -21,3 +21,5 @@
 
 
 ### Gereksinim Dağılımları:
+1.[Havva Çiğse Şahin'in gereksinimleri](gereksinim.md)
+
