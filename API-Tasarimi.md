@@ -1,6 +1,6 @@
 # H-News REST API Metotları
 
-**API Test Videosu:** [Proje bitiminde eklenecek]
+**[h-news API YAML Dosyasını Görüntülemek İçin Tıklayınız](h-news-api.yml)
 
 ---
 
