@@ -1,159 +1,138 @@
-openapi: 3.0.3
-info:
-  title: H-News API
-  version: 1.0.0
-  description: >
-    H-News mobil haber uygulaması için hazırlanmış API dokümantasyonudur.
-    Bu API haber listeleme, haber detay görüntüleme, arama,
-    favorilere ekleme ve offline haber yönetimi işlemlerini kapsar.
-  contact:
-    name: H-News Team
-    email: info@hnews.com
+# H-News REST API Metotları
 
-servers:
-  - url: https://api.hnews.com
-    description: Production Server
-  - url: http://localhost:3000
-    description: Development Server
+**API Test Videosu:** [Proje bitiminde eklenecek]
 
-tags:
-  - name: News
-    description: Haber işlemleri
-  - name: Favorites
-    description: Favori haber yönetimi
-  - name: Offline
-    description: Offline haber işlemleri
+---
 
-paths:
+## 1. Haberleri Listeleme
+- **Endpoint:** `GET /news`
+- **Authentication:** Gerekli değil
+- **Response:** `200 OK` - Sistemde bulunan tüm haberler başarıyla listelendi
 
-  /api/news:
-    get:
-      tags:
-        - News
-      summary: Haberleri Listeleme
-      description: Sistemdeki tüm haberleri listeler.
-      responses:
-        "200":
-          description: Haber listesi başarıyla getirildi
+---
 
-  /api/news/{newsId}:
-    get:
-      tags:
-        - News
-      summary: Haber Detay Görüntüleme
-      description: Seçilen haberin detaylarını getirir.
-      parameters:
-        - name: newsId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Haber detayları getirildi
+## 2. Haber Detayı Görüntüleme
+- **Endpoint:** `GET /news/{newsId}`
+- **Path Parameters:**
+  - `newsId` (string, required) - Görüntülenecek haberin ID değeri
+- **Authentication:** Gerekli değil
+- **Response:** `200 OK` - Haber detay bilgileri başarıyla getirildi
 
-  /api/news/search:
-    get:
-      tags:
-        - News
-      summary: Haber Arama
-      description: Girilen anahtar kelimeye göre haber arar.
-      parameters:
-        - name: query
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Arama sonuçları listelendi
+---
 
-  /api/news/popular:
-    get:
-      tags:
-        - News
-      summary: Popüler Haberleri Görüntüleme
-      description: En çok okunan haberleri listeler.
-      responses:
-        "200":
-          description: Popüler haberler getirildi
+## 3. Haber Arama
+- **Endpoint:** `GET /news/search`
+- **Query Parameters:**
+  - `query` (string, required) - Aranacak anahtar kelime
+- **Authentication:** Gerekli değil
+- **Response:** `200 OK` - Arama sonuçları başarıyla listelendi
 
-  /api/news/latest:
-    get:
-      tags:
-        - News
-      summary: Son Eklenen Haberler
-      description: En son eklenen haberleri listeler.
-      responses:
-        "200":
-          description: Son haberler getirildi
+---
 
-  /api/favorites:
-    post:
-      tags:
-        - Favorites
-      summary: Haberi Favorilere Ekleme
-      description: Kullanıcının seçtiği haberi favorilere ekler.
-      responses:
-        "201":
-          description: Haber favorilere eklendi
+## 4. Kategoriye Göre Haber Filtreleme
+- **Endpoint:** `GET /news`
+- **Query Parameters:**
+  - `category` (string, required) - Filtrelenecek haber kategorisi
+- **Authentication:** Gerekli değil
+- **Response:** `200 OK` - Seçilen kategoriye ait haberler başarıyla listelendi
 
-    get:
-      tags:
-        - Favorites
-      summary: Favori Haberleri Listeleme
-      description: Kullanıcının favori haberlerini listeler.
-      responses:
-        "200":
-          description: Favori haberler getirildi
+---
 
-  /api/favorites/{newsId}:
-    delete:
-      tags:
-        - Favorites
-      summary: Favoriden Haber Silme
-      description: Seçilen haberi favorilerden kaldırır.
-      parameters:
-        - name: newsId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: Haber favorilerden kaldırıldı
+## 5. Popüler Haberleri Görüntüleme
+- **Endpoint:** `GET /news/popular`
+- **Authentication:** Gerekli değil
+- **Response:** `200 OK` - En popüler haberler başarıyla getirildi
 
-  /api/offline:
-    post:
-      tags:
-        - Offline
-      summary: Offline Okumak İçin Haber Kaydetme
-      description: Haber offline okumak için cihazda saklanır.
-      responses:
-        "201":
-          description: Haber offline kaydedildi
+---
 
-    get:
-      tags:
-        - Offline
-      summary: Offline Haberleri Listeleme
-      description: Offline kaydedilmiş haberleri listeler.
-      responses:
-        "200":
-          description: Offline haberler getirildi
+## 6. Son Eklenen Haberleri Görüntüleme
+- **Endpoint:** `GET /news/latest`
+- **Authentication:** Gerekli değil
+- **Response:** `200 OK` - En son eklenen haberler başarıyla listelendi
 
-  /api/offline/{newsId}:
-    delete:
-      tags:
-        - Offline
-      summary: Offline Haberi Silme
-      description: Offline kaydedilmiş haberi siler.
-      parameters:
-        - name: newsId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: Offline haber silindi
+---
+
+## 7. Haberi Okundu Olarak İşaretleme
+- **Endpoint:** `PUT /news/{newsId}/read`
+- **Path Parameters:**
+  - `newsId` (string, required) - Okundu olarak işaretlenecek haber ID'si
+- **Authentication:** Kullanıcı oturumu gerekli
+- **Response:** `200 OK` - Haber başarıyla okundu olarak işaretlendi
+
+---
+
+# Favori Haber İşlemleri
+
+## 8. Haberi Favorilere Ekleme
+- **Endpoint:** `POST /favorites`
+- **Request Body:**
+```json
+{
+  "newsId": "news_12345"
+}
+```
+- **Authentication:** Kullanıcı oturumu gerekli
+- **Response:** `201 Created` - Haber favori listesine başarıyla eklendi
+
+---
+
+## 9. Favori Haberleri Görüntüleme
+- **Endpoint:** `GET /favorites`
+- **Authentication:** Kullanıcı oturumu gerekli
+- **Response:** `200 OK` - Kullanıcının favori haberleri başarıyla listelendi
+
+---
+
+## 10. Favorilerden Haber Silme
+- **Endpoint:** `DELETE /favorites/{newsId}`
+- **Path Parameters:**
+  - `newsId` (string, required) - Favorilerden kaldırılacak haber ID'si
+- **Authentication:** Kullanıcı oturumu gerekli
+- **Response:** `204 No Content` - Haber favorilerden başarıyla kaldırıldı
+
+---
+
+## 11. Favori Habere Not veya Etiket Ekleme
+- **Endpoint:** `PUT /favorites/{newsId}`
+- **Path Parameters:**
+  - `newsId` (string, required) - Güncellenecek favori haber ID'si
+- **Request Body:**
+```json
+{
+  "note": "Bu haberi daha sonra tekrar incele",
+  "tag": "Önemli"
+}
+```
+- **Authentication:** Kullanıcı oturumu gerekli
+- **Response:** `200 OK` - Favori haber bilgisi başarıyla güncellendi
+
+---
+
+# Offline Haber İşlemleri
+
+## 12. Haberi Offline Kaydetme
+- **Endpoint:** `POST /offline`
+- **Request Body:**
+```json
+{
+  "newsId": "news_12345"
+}
+```
+- **Authentication:** Kullanıcı oturumu gerekli
+- **Response:** `201 Created` - Haber offline okumak için başarıyla kaydedildi
+
+---
+
+## 13. Offline Haberleri Listeleme
+- **Endpoint:** `GET /offline`
+- **Authentication:** Kullanıcı oturumu gerekli
+- **Response:** `200 OK` - Offline kaydedilmiş haberler başarıyla getirildi
+
+---
+
+## 14. Offline Haberi Silme
+- **Endpoint:** `DELETE /offline/{newsId}`
+- **Path Parameters:**
+  - `newsId` (string, required) - Silinecek offline haber ID'si
+- **Authentication:** Kullanıcı oturumu gerekli
+- **Response:** `204 No Content` - Offline haber başarıyla silindi
