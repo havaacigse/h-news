@@ -3,28 +3,27 @@ info:
   title: H-News API
   version: 1.0.0
   description: >
-    H-News haber ve paylaşım platformunun temel API dokümantasyonudur. 
-    Bu API, kullanıcı kaydı, haber/makale listeleme, haber paylaşma, 
-    yorumlama ve oylama (upvote) gibi işlemleri kapsar.
+    H-News (Hacker News Clone) platformu için geliştirilmiş REST API dokümantasyonudur. 
+    Bu API; kullanıcı yönetimi, haber paylaşımı, oylama sistemi ve yorum süreçlerini yönetir.
   contact:
     name: H-News Geliştirici Ekibi
-    email: iletisim@h-news.com
+    email: support@h-news.com
 
 servers:
   - url: https://api.h-news.com
-    description: Üretim sunucusu (Production)
+    description: Production server
   - url: http://localhost:3000
-    description: Yerel geliştirme sunucusu (Development)
+    description: Local development server
 
 tags:
   - name: Auth
-    description: Kimlik doğrulama ve kayıt işlemleri
-  - name: Users
-    description: Kullanıcı profili yönetimi
+    description: Kayıt ve giriş işlemleri
   - name: News
-    description: Haber ve makale içerikleri yönetimi
+    description: Haber gönderileri ve oylama işlemleri
   - name: Comments
-    description: Haberlere yapılan yorumların yönetimi
+    description: Haberlere yapılan yorumlar
+  - name: Users
+    description: Kullanıcı profil ve tercih yönetimi
 
 security:
   - BearerAuth: []
@@ -34,9 +33,7 @@ paths:
     post:
       tags:
         - Auth
-      summary: Kullanıcı Kaydı Olma
-      description: Yeni kullanıcıların e-posta ve şifre ile sisteme üye olmasını sağlar.
-      security: []
+      summary: Yeni Kullanıcı Kaydı
       requestBody:
         required: true
         content:
@@ -46,16 +43,12 @@ paths:
       responses:
         "201":
           description: Kullanıcı başarıyla oluşturuldu
-        "400":
-          description: Geçersiz istek verisi
 
   /api/auth/login:
     post:
       tags:
         - Auth
-      summary: Giriş Yapma
-      description: Mevcut kullanıcıların sisteme giriş yapmasını sağlar.
-      security: []
+      summary: Kullanıcı Girişi
       requestBody:
         required: true
         content:
@@ -64,69 +57,29 @@ paths:
               $ref: '#/components/schemas/AuthInput'
       responses:
         "200":
-          description: Başarılı giriş, token döner
-        "401":
-          description: Hatalı e-posta veya şifre
-
-  /api/users/{userId}:
-    parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: string
-    put:
-      tags:
-        - Users
-      summary: Profil Bilgilerini Güncelleme
-      description: Kullanıcının profil bilgilerini değiştirmesini sağlar.
-      responses:
-        "200":
-          description: Profil güncellendi
-        "401":
-          description: Yetkisiz erişim
-    delete:
-      tags:
-        - Users
-      summary: Profil Silme
-      description: Kullanıcının hesabını sistemden kalıcı olarak siler.
-      responses:
-        "204":
-          description: Profil başarıyla silindi
+          description: Başarılı giriş, JWT Token döner
 
   /api/news:
     get:
       tags:
         - News
-      summary: Haberleri Listeleme
-      description: Ana sayfada en son paylaşılan veya en popüler haberleri listeler.
+      summary: Tüm Haberleri Listele
       responses:
         "200":
-          description: Haberler başarıyla listelendi
+          description: Haber listesi başarıyla getirildi
     post:
       tags:
         - News
-      summary: Yeni Haber Paylaşma
-      description: Kullanıcının platformda yeni bir haber veya bağlantı paylaşmasını sağlar.
+      summary: Yeni Haber/Link Paylaş
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewsInput'
       responses:
         "201":
           description: Haber başarıyla paylaşıldı
-
-  /api/news/search:
-    get:
-      tags:
-        - News
-      summary: Haber Arama
-      description: Girilen kelimeye göre haber başlıklarında veya içeriklerinde arama yapar.
-      parameters:
-        - name: query
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Arama sonuçları listelendi
 
   /api/news/{newsId}/upvote:
     parameters:
@@ -138,11 +91,10 @@ paths:
     post:
       tags:
         - News
-      summary: Haberi Oylama (Upvote)
-      description: Kullanıcının beğendiği bir habere oy vermesini (upvote) sağlar.
+      summary: Haberi Oyla (Upvote)
       responses:
         "200":
-          description: Oy başarıyla kaydedildi
+          description: Oy başarıyla eklendi
 
   /api/news/{newsId}/comments:
     parameters:
@@ -154,19 +106,47 @@ paths:
     get:
       tags:
         - Comments
-      summary: Haberin Yorumlarını Listeleme
-      description: Belirli bir habere yapılmış olan yorumları listeler.
+      summary: Habere Ait Yorumları Getir
       responses:
         "200":
-          description: Yorumlar getirildi
+          description: Yorumlar listelendi
     post:
       tags:
         - Comments
-      summary: Habere Yorum Yapma
-      description: Kullanıcının habere yeni bir yorum eklemesini sağlar.
+      summary: Habere Yorum Yap
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "Bu makale çok bilgilendirici, teşekkürler."
       responses:
         "201":
-          description: Yorum başarıyla eklendi
+          description: Yorum eklendi
+
+  /api/users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - Users
+      summary: Kullanıcı Profili Görüntüle
+    put:
+      tags:
+        - Users
+      summary: Profil Bilgilerini Güncelle
+    delete:
+      tags:
+        - Users
+      summary: Hesabı Sil
 
 components:
   securitySchemes:
@@ -178,13 +158,32 @@ components:
   schemas:
     AuthInput:
       type: object
-      properties:
-        email:
-          type: string
-          example: "kullanici@h-news.com"
-        password:
-          type: string
-          example: "guvenliSifre123"
       required:
         - email
         - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: "user@h-news.com"
+        password:
+          type: string
+          format: password
+          example: "securePass123"
+
+    NewsInput:
+      type: object
+      required:
+        - title
+        - url
+      properties:
+        title:
+          type: string
+          example: "H-News API Tasarımı Yayında"
+        url:
+          type: string
+          format: uri
+          example: "https://github.com/havaacigse/h-news"
+        description:
+          type: string
+          example: "H-News projesi için OpenAPI standartlarında dokümantasyon."
