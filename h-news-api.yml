@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: H-News API
+  version: 1.0.0
+  description: >
+    H-News haber ve paylaşım platformunun temel API dokümantasyonudur. 
+    Bu API, kullanıcı kaydı, haber/makale listeleme, haber paylaşma, 
+    yorumlama ve oylama (upvote) gibi işlemleri kapsar.
+  contact:
+    name: H-News Geliştirici Ekibi
+    email: iletisim@h-news.com
+
+servers:
+  - url: https://api.h-news.com
+    description: Üretim sunucusu (Production)
+  - url: http://localhost:3000
+    description: Yerel geliştirme sunucusu (Development)
+
+tags:
+  - name: Auth
+    description: Kimlik doğrulama ve kayıt işlemleri
+  - name: Users
+    description: Kullanıcı profili yönetimi
+  - name: News
+    description: Haber ve makale içerikleri yönetimi
+  - name: Comments
+    description: Haberlere yapılan yorumların yönetimi
+
+security:
+  - BearerAuth: []
+
+paths:
+  /api/auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Kullanıcı Kaydı Olma
+      description: Yeni kullanıcıların e-posta ve şifre ile sisteme üye olmasını sağlar.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthInput'
+      responses:
+        "201":
+          description: Kullanıcı başarıyla oluşturuldu
+        "400":
+          description: Geçersiz istek verisi
+
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Giriş Yapma
+      description: Mevcut kullanıcıların sisteme giriş yapmasını sağlar.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthInput'
+      responses:
+        "200":
+          description: Başarılı giriş, token döner
+        "401":
+          description: Hatalı e-posta veya şifre
+
+  /api/users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      tags:
+        - Users
+      summary: Profil Bilgilerini Güncelleme
+      description: Kullanıcının profil bilgilerini değiştirmesini sağlar.
+      responses:
+        "200":
+          description: Profil güncellendi
+        "401":
+          description: Yetkisiz erişim
+    delete:
+      tags:
+        - Users
+      summary: Profil Silme
+      description: Kullanıcının hesabını sistemden kalıcı olarak siler.
+      responses:
+        "204":
+          description: Profil başarıyla silindi
+
+  /api/news:
+    get:
+      tags:
+        - News
+      summary: Haberleri Listeleme
+      description: Ana sayfada en son paylaşılan veya en popüler haberleri listeler.
+      responses:
+        "200":
+          description: Haberler başarıyla listelendi
+    post:
+      tags:
+        - News
+      summary: Yeni Haber Paylaşma
+      description: Kullanıcının platformda yeni bir haber veya bağlantı paylaşmasını sağlar.
+      responses:
+        "201":
+          description: Haber başarıyla paylaşıldı
+
+  /api/news/search:
+    get:
+      tags:
+        - News
+      summary: Haber Arama
+      description: Girilen kelimeye göre haber başlıklarında veya içeriklerinde arama yapar.
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Arama sonuçları listelendi
+
+  /api/news/{newsId}/upvote:
+    parameters:
+      - name: newsId
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - News
+      summary: Haberi Oylama (Upvote)
+      description: Kullanıcının beğendiği bir habere oy vermesini (upvote) sağlar.
+      responses:
+        "200":
+          description: Oy başarıyla kaydedildi
+
+  /api/news/{newsId}/comments:
+    parameters:
+      - name: newsId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - Comments
+      summary: Haberin Yorumlarını Listeleme
+      description: Belirli bir habere yapılmış olan yorumları listeler.
+      responses:
+        "200":
+          description: Yorumlar getirildi
+    post:
+      tags:
+        - Comments
+      summary: Habere Yorum Yapma
+      description: Kullanıcının habere yeni bir yorum eklemesini sağlar.
+      responses:
+        "201":
+          description: Yorum başarıyla eklendi
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    AuthInput:
+      type: object
+      properties:
+        email:
+          type: string
+          example: "kullanici@h-news.com"
+        password:
+          type: string
+          example: "guvenliSifre123"
+      required:
+        - email
+        - password
