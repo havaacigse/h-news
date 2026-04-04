@@ -1,5 +1,7 @@
 # H-News REST API Metotları
 
+**API Domain Adresi:** https://h-news.onrender.com
+
 **API Test Videosu:** [Proje bitiminde eklenecek]
 
 ## 1. Haberleri Listeleme
