@@ -1,7 +1,9 @@
 # Video Sunum
 
 ## Sunum Videosu
-Video Linki: [Sunum videosu linki buraya eklenecek]
+**API Test Videosu:** [H-News REST API Test](https://youtu.be/OeKdMS0eJAo)
+
+**Frontend Test Videosu:** [H-News Frontend Test](https://youtu.be/5EFnN_NnKZs)
 
 ---
 
