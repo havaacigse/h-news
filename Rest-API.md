@@ -2,7 +2,7 @@
 
 **API Domain Adresi:** https://h-news.onrender.com
 
-**API Test Videosu:** [https://youtu.be/OeKdMS0eJAo]
+**API Test Videosu:** https://youtu.be/OeKdMS0eJAo
 
 ## 1. Haberleri Listeleme
 - **Endpoint:** `GET /news`
