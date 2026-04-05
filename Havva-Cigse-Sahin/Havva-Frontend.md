@@ -1,7 +1,7 @@
 # Havva Çiğse Şahin - Web Frontend Görevleri
 
 ## YouTube Video
-[Video Linki](VIDEO_LINKI_BURAYA)
+**Frontend Test Videosu:** [H-News Frontend Test](https://youtu.be/5EFnN_NnKZs)
 
 ---
 
