@@ -28,3 +28,4 @@ Haber, Bilgi
 1. [Gereksinim Analizi](https://github.com/havaacigse/h-news/blob/main/GereksinimAnalizi.md)
 2. [REST API Tasarımı](https://github.com/havaacigse/h-news/blob/main/API-Tasarimi.md)
 3. [REST API Görevleri](https://github.com/havaacigse/h-news/blob/main/Rest-API.md)
+4. [Web Front-End](Web-Frontend.md)

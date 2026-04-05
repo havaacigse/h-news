@@ -168,5 +168,9 @@ app.delete("/offline-news/:id", (req, res) => {
     res.status(204).send();
 });
 
+app.get('/', (req, res) => {
+  res.json({ message: 'H-News Backend calisiyor 🚀' });
+});
+
 const PORT = 3001;
 app.listen(PORT, () => console.log(`✅ H-News Backend: http://localhost:${PORT}`));
