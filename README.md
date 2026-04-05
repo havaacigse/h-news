@@ -14,6 +14,11 @@ H-News, kullanıcıların güncel ve önemli haberlere kolayca erişebilmesini s
 Haber, Bilgi
 
 ---
+## Proje Linkleri
+- **REST API Adresi:** https://h-news.onrender.com
+- **Web Frontend Adresi:** https://h-news-eight.vercel.app
+
+---
 
 ### Proje Ekibi:
 
