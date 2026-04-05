@@ -116,9 +116,3 @@
   - `id` (string, required) - Offline haber ID'si
 - **Authentication:** Bearer Token gerekli
 - **Response:** `204 No Content` - Offline haber silindi
-
-## 16. Haberin Yorumlarını Görüntüleme
-- **Endpoint:** `GET /news/{id}/comments`
-- **Path Parameters:**
-  - `id` (string, required) - Haber ID'si
-- **Response:** `200 OK` - Haberin yorumları listelendi
