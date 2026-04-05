@@ -6,8 +6,7 @@ Bu dokümanda, web uygulamasının kullanıcı arayüzü (UI) ve kullanıcı den
 
 ## Grup Üyelerinin Web Frontend Görevleri
 
-1. [Havva Çiğse Şahin'in Web Frontend Görevleri](https://github.com/havaacigse/h-news/blob/main/Havva-Web-Frontend.md)
-
+1. [Havva Çiğse Şahin'in Web Frontend Görevleri](Havva-Frontend.md)
 ---
 
 ## Genel Web Frontend Prensipleri
