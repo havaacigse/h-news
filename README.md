@@ -4,7 +4,7 @@
 
 ## Proje Hakkında
 
-![gorsel](news.jpeg) 
+![](news.jpg) 
 
 **Proje Tanımı:**  
 > H-News, kullanıcıların güncel haberleri web ve mobil platformlar üzerinden takip edebildiği bir haber uygulamasıdır. Kullanıcılar uygulama üzerinden haberleri listeleyebilir, kategoriye göre filtreleyebilir, haberler arasında arama yapabilir ve haber detaylarını görüntüleyebilir. Ayrıca haberleri favorilere ekleyebilir, favori haberlerine not veya etiket ekleyebilir, haberleri offline okumak için kaydedebilir ve okundu / okunmadı durumlarını yönetebilir.
