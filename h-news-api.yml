@@ -1,0 +1,189 @@
+openapi: 3.0.3
+info:
+  title: H-News API
+  version: 1.0.0
+  description: >
+    H-News (Hacker News Clone) platformu için geliştirilmiş REST API dokümantasyonudur. 
+    Bu API; kullanıcı yönetimi, haber paylaşımı, oylama sistemi ve yorum süreçlerini yönetir.
+  contact:
+    name: H-News Geliştirici Ekibi
+    email: support@h-news.com
+
+servers:
+  - url: https://api.h-news.com
+    description: Production server
+  - url: http://localhost:3000
+    description: Local development server
+
+tags:
+  - name: Auth
+    description: Kayıt ve giriş işlemleri
+  - name: News
+    description: Haber gönderileri ve oylama işlemleri
+  - name: Comments
+    description: Haberlere yapılan yorumlar
+  - name: Users
+    description: Kullanıcı profil ve tercih yönetimi
+
+security:
+  - BearerAuth: []
+
+paths:
+  /api/auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Yeni Kullanıcı Kaydı
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthInput'
+      responses:
+        "201":
+          description: Kullanıcı başarıyla oluşturuldu
+
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Kullanıcı Girişi
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthInput'
+      responses:
+        "200":
+          description: Başarılı giriş, JWT Token döner
+
+  /api/news:
+    get:
+      tags:
+        - News
+      summary: Tüm Haberleri Listele
+      responses:
+        "200":
+          description: Haber listesi başarıyla getirildi
+    post:
+      tags:
+        - News
+      summary: Yeni Haber/Link Paylaş
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewsInput'
+      responses:
+        "201":
+          description: Haber başarıyla paylaşıldı
+
+  /api/news/{newsId}/upvote:
+    parameters:
+      - name: newsId
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - News
+      summary: Haberi Oyla (Upvote)
+      responses:
+        "200":
+          description: Oy başarıyla eklendi
+
+  /api/news/{newsId}/comments:
+    parameters:
+      - name: newsId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - Comments
+      summary: Habere Ait Yorumları Getir
+      responses:
+        "200":
+          description: Yorumlar listelendi
+    post:
+      tags:
+        - Comments
+      summary: Habere Yorum Yap
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "Bu makale çok bilgilendirici, teşekkürler."
+      responses:
+        "201":
+          description: Yorum eklendi
+
+  /api/users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - Users
+      summary: Kullanıcı Profili Görüntüle
+    put:
+      tags:
+        - Users
+      summary: Profil Bilgilerini Güncelle
+    delete:
+      tags:
+        - Users
+      summary: Hesabı Sil
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    AuthInput:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: "user@h-news.com"
+        password:
+          type: string
+          format: password
+          example: "securePass123"
+
+    NewsInput:
+      type: object
+      required:
+        - title
+        - url
+      properties:
+        title:
+          type: string
+          example: "H-News API Tasarımı Yayında"
+        url:
+          type: string
+          format: uri
+          example: "https://github.com/havaacigse/h-news"
+        description:
+          type: string
+          example: "H-News projesi için OpenAPI standartlarında dokümantasyon."
