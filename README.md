@@ -21,11 +21,8 @@
 
 ## Proje Linkleri
 
-- **REST API Adresi:** [http://localhost:3000/api/news](http://localhost:3000/api/news)
-- **Health Check Adresi:** [http://localhost:3000/health](http://localhost:3000/health)
-- **RabbitMQ Yönetim Paneli:** [http://localhost:15672](http://localhost:15672)
-- **Web Frontend Adresi:** h-news-eight.vercel.app 
-- **Mobil Uygulama:** `h_news.xcodeproj` dosyası Xcode ile çalıştırılır.
+- **REST API Adresi:** [https://h-news.onrender.com](https://h-news.onrender.com)
+- **Web Frontend Adresi:** [https://h-news-eight.vercel.app](https://h-news-eight.vercel.app)
 
 > **Güvenlik Notu:** RabbitMQ kullanıcı adı, şifre, token veya secret değerleri public repoda paylaşılmaz. Demo ortamı için gerekli bilgiler local `.env` dosyasında tanımlanır.
 
