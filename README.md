@@ -40,17 +40,14 @@
 
 Proje dokümantasyonuna aşağıdaki linklerden erişebilirsiniz:
 
+## Dokümantasyon
 1. [Gereksinim Analizi](Gereksinim-Analizi.md)
 2. [REST API Tasarımı](API-Tasarimi.md)
 3. [REST API](Rest-API.md)
 4. [Web Front-End](WebFrontEnd.md)
 5. [Mobil Front-End](MobilFrontEnd.md)
 6. [Mobil Backend](MobilBackEnd.md)
-7. [Mobil Gereksinim Analizi](MobilGereksinimAnalizi.md)
-8. [Mobil Mimari](MobilMimari.md)
-9. [Mobil Test Senaryoları](MobilTestSenaryolari.md)
-10. [Video Sunum](Sunum.md)
-11. [Backend Dokümantasyonu](backend/README.md)
+7. [Video Sunum](Sunum.md)
 
 ---
 
