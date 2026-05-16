@@ -15,7 +15,7 @@
 > Haber Uygulaması / Mobil Haber Sistemi / Web ve Mobil Haber Platformu
 
 **Referans Uygulama:**  
-> [Google News](https://news.google.com)  
+> [Habertürk](https://www.haberturk.com)
 
 ---
 
