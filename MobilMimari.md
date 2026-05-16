@@ -126,10 +126,11 @@ Backend container içinde Redis ve RabbitMQ servis adlarıyla bağlanır:
 
 ```text
 REDIS_URL=redis://redis:6379
-RABBITMQ_URL=amqp://<username>:<password>@rabbitmq:5672
+RABBITMQ_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
 ```
 
 Güvenlik notu: Gerçek kullanıcı adı, şifre, token ve secret değerleri public repoya eklenmemiştir. Demo ortamında bu bilgiler local `.env` dosyası üzerinden tanımlanmalıdır.
+RabbitMQ kullanıcı adı ve şifresi public repoda paylaşılmaz. Bu değerler local `.env` dosyasında `RABBITMQ_USER` ve `RABBITMQ_PASSWORD` olarak tanımlanır.
 
 ## CI/CD Mimarisi
 
