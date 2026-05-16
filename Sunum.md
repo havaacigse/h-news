@@ -1,8 +1,10 @@
-# H-News Final Sunumu
+# H-News Sunumu
 
 ## Proje Adı
 
-H-News Mobil Haber Uygulaması
+H-News Haber Uygulaması
+
+**Frontend Test Videosu:** [Youtube h-news](https://www.youtube.com/watch?v=5EFnN_NnKZs)
 
 ## Problem Tanımı
 
