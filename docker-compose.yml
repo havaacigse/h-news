@@ -9,7 +9,7 @@ services:
     environment:
       PORT: 3000
       REDIS_URL: redis://redis:6379
-      RABBITMQ_URL: amqp://hnews:hnews123@rabbitmq:5672
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-your_rabbitmq_user}:${RABBITMQ_PASSWORD:-your_rabbitmq_password}@rabbitmq:5672
       RABBITMQ_QUEUE: h_news_events
       CACHE_TTL_SECONDS: 60
     depends_on:
@@ -26,8 +26,8 @@ services:
     image: rabbitmq:3-management
     container_name: h_news_rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: hnews
-      RABBITMQ_DEFAULT_PASS: hnews123
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-your_rabbitmq_user}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-your_rabbitmq_password}
     ports:
       - "5672:5672"
       - "15672:15672"

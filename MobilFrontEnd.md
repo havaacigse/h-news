@@ -246,3 +246,7 @@ Tüm haber listeleme ve işlem endpointleriyle dolaylı ilişkilidir.
 
 ### Kullanıcı deneyimi detayları
 Backend kapalı olsa bile uygulama tamamen çökmez ve demo akışı devam eder.
+
+## Güvenlik Notu
+
+Gerçek kullanıcı adı, şifre, token ve secret değerleri public repoya eklenmemiştir. Demo ortamında bu bilgiler local `.env` dosyası üzerinden tanımlanmalıdır.

@@ -116,9 +116,11 @@ API: http://localhost:3000
 Redis: localhost:6379
 RabbitMQ: localhost:5672
 RabbitMQ Panel: http://localhost:15672
-RabbitMQ Username: hnews
-RabbitMQ Password: hnews123
+RabbitMQ Username: <RABBITMQ_USER>
+RabbitMQ Password: <RABBITMQ_PASSWORD>
 ```
+
+Güvenlik notu: Gerçek kullanıcı adı, şifre, token ve secret değerleri public repoya eklenmemiştir. Demo ortamında RabbitMQ bilgileri local `.env` dosyası üzerinden tanımlanmalıdır.
 
 Health kontrolü:
 
@@ -151,7 +153,7 @@ Beklenen servis durumu:
 
 1. `docker compose up --build` komutunu çalıştır.
 2. `/health` endpointinde Redis ve RabbitMQ servislerinin `enabled` olduğunu göster.
-3. RabbitMQ paneline `hnews / hnews123` ile giriş yap.
+3. RabbitMQ paneline local `.env` içinde tanımlanan RabbitMQ kullanıcı adı ve şifresi ile giriş yap.
 4. Mobil uygulamayı Xcode simulator’da aç.
 5. Haberleri listele.
 6. Arama yap.

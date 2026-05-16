@@ -30,3 +30,7 @@
 | 4 | GitHub Actions CI/CD | Backend install, test, syntax check ve Docker build kontrolü yapılır. | Tamamlandı |
 | 5 | API fallback mekanizması | API başarısız olursa mobil uygulama mock/local state ile devam eder. | Tamamlandı |
 | 6 | Profil istatistikleri | Toplam, favori, offline ve okunan haber sayıları gösterilir. | Tamamlandı |
+
+## Güvenlik Notu
+
+Gerçek kullanıcı adı, şifre, token ve secret değerleri public repoya eklenmemiştir. Demo ortamında bu bilgiler local `.env` dosyası üzerinden tanımlanmalıdır.

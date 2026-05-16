@@ -30,7 +30,7 @@ http://localhost:3000
 RabbitMQ varsayılan adresi:
 
 ```text
-amqp://hnews:hnews123@localhost:5672
+amqp://<username>:<password>@localhost:5672
 ```
 
 RabbitMQ çalışmıyorsa backend kapanmaz. API cevapları dönmeye devam eder, sadece event publish işlemleri console warning olarak atlanır.
@@ -169,7 +169,9 @@ RabbitMQ, mobil uygulamadan gelen kullanıcı davranışlarını analiz, loglama
 `.env` ile ayarlanabilen değerler:
 
 ```text
-RABBITMQ_URL=amqp://hnews:hnews123@localhost:5672
+RABBITMQ_USER=your_rabbitmq_user
+RABBITMQ_PASSWORD=your_rabbitmq_password
+RABBITMQ_URL=amqp://your_rabbitmq_user:your_rabbitmq_password@localhost:5672
 RABBITMQ_QUEUE=h_news_events
 ```
 
@@ -304,17 +306,17 @@ RabbitMQ Panel: http://localhost:15672
 RabbitMQ management paneli için varsayılan bilgiler:
 
 ```text
-Kullanıcı adı: hnews
-Şifre: hnews123
+Kullanıcı adı: <RABBITMQ_USER>
+Şifre: <RABBITMQ_PASSWORD>
 ```
 
-Demo ortamında RabbitMQ için varsayılan `guest/guest` yerine özel `hnews/hnews123` kullanıcısı kullanılmıştır.
+Demo ortamında RabbitMQ için varsayılan kullanıcı yerine local `.env` dosyasında tanımlanan özel kullanıcı kullanılır. Gerçek kullanıcı adı, şifre, token ve secret değerleri public repoya eklenmemiştir.
 
 Backend container içinde Redis ve RabbitMQ bağlantıları servis adlarıyla yapılır:
 
 ```text
 REDIS_URL=redis://redis:6379
-RABBITMQ_URL=amqp://hnews:hnews123@rabbitmq:5672
+RABBITMQ_URL=amqp://<username>:<password>@rabbitmq:5672
 ```
 
 Health kontrolü:

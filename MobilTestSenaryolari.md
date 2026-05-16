@@ -18,3 +18,7 @@
 | 14 | RabbitMQ enabled kontrolü | Docker çalışırken `/health` kontrol edilir. | `rabbitmq: enabled` görünür. | Tamamlandı |
 | 15 | RabbitMQ queue event kontrolü | RabbitMQ panelinde kuyruk izlenir, mobilde aksiyon yapılır. | `h_news_events` kuyruğunda event oluşur. | Tamamlandı |
 | 16 | GitHub Actions CI/CD kontrolü | GitHub Actions workflow açılır veya push yapılır. | Backend CI adımları başarılı çalışır. | Tamamlandı |
+
+## Güvenlik Notu
+
+Gerçek kullanıcı adı, şifre, token ve secret değerleri public repoya eklenmemiştir. Demo ortamında bu bilgiler local `.env` dosyası üzerinden tanımlanmalıdır.

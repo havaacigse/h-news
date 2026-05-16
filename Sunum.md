@@ -96,7 +96,7 @@ GitHub Actions backend için otomatik kontrol yapar:
 
 1. `docker compose up --build`
 2. `/health` endpointinde redis ve rabbitmq enabled göster
-3. RabbitMQ paneline `hnews / hnews123` ile giriş yap
+3. RabbitMQ paneline local `.env` içinde tanımlanan kullanıcı adı ve şifre ile giriş yap
 4. Mobil uygulamayı Xcode simulator’da aç
 5. Haberleri listele
 6. Arama yap
@@ -105,6 +105,10 @@ GitHub Actions backend için otomatik kontrol yapar:
 9. Okundu işaretle
 10. RabbitMQ queue’da event oluştuğunu göster
 11. GitHub Actions workflow’u göster
+
+## Güvenlik Notu
+
+Gerçek kullanıcı adı, şifre, token ve secret değerleri public repoya eklenmemiştir. Demo ortamında bu bilgiler local `.env` dosyası üzerinden tanımlanmalıdır.
 
 ## Sonuç
 

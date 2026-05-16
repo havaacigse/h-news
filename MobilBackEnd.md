@@ -353,8 +353,10 @@ Kullanıcı aksiyonlarını asenkron event olarak kuyruğa göndermek.
 - Paket: amqplib
 - Docker servisi: rabbitmq
 - Panel: http://localhost:15672
-- Kullanıcı: hnews
-- Şifre: hnews123
+- Kullanıcı: `<RABBITMQ_USER>`
+- Şifre: `<RABBITMQ_PASSWORD>`
+
+Gerçek kullanıcı adı, şifre, token ve secret değerleri public repoya eklenmemiştir. Demo ortamında bu bilgiler local `.env` dosyası üzerinden tanımlanmalıdır.
 
 ### Hata Yönetimi
 RabbitMQ kapalıysa API response dönmeye devam eder.
