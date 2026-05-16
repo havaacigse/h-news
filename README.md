@@ -24,8 +24,6 @@
 - **REST API Adresi:** [https://h-news.onrender.com](https://h-news.onrender.com)
 - **Web Frontend Adresi:** [https://h-news-eight.vercel.app](https://h-news-eight.vercel.app)
 
-> **Güvenlik Notu:** RabbitMQ kullanıcı adı, şifre, token veya secret değerleri public repoda paylaşılmaz. Demo ortamı için gerekli bilgiler local `.env` dosyasında tanımlanır.
-
 ---
 
 ## Proje Ekibi
