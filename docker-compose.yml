@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: h_news_backend
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://hnews:hnews123@rabbitmq:5672
+      RABBITMQ_QUEUE: h_news_events
+      CACHE_TTL_SECONDS: 60
+    depends_on:
+      - redis
+      - rabbitmq
+
+  redis:
+    image: redis:7-alpine
+    container_name: h_news_redis
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: h_news_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: hnews
+      RABBITMQ_DEFAULT_PASS: hnews123
+    ports:
+      - "5672:5672"
+      - "15672:15672"
